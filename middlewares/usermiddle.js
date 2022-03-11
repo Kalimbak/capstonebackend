@@ -11,7 +11,7 @@ export const authMiddleware = (req, res, next) => {
     const token = authHeader ? authHeader.split(" ")[1] : '';
     console.log(req.headers);
     if (token == '') return res.sendStatus(401);
-    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
       if (err){        console.log(err); return res.sendStatus(403);}
       req.user = user;
       console.log(user);

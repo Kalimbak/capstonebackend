@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please confirm The password'],
         minlength: [8, 'passwords do not match'],
-        select:false
+        // select:false
     },
 });
 

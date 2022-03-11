@@ -1,5 +1,8 @@
 
 import  Article  from "../models/blogsSchema.js"
+import dotenv from "dotenv"
+
+dotenv.config();
 
 export async function getArticle (req, res, next) {
     let article
