@@ -83,22 +83,68 @@ export const login = async (req, res) => {
 // check if the email exists
 
 const user = await User.findOne({email: req.body.email});
-console.log(user);
-if(!user){
-    return res.status(400).send('Email is not found');
-}else {
-    const isPasswordValid = await bcrypt.compare(req.body.password, user.confirmPassword);
-    // console.log(isPasswordValid)
-    if(!isPasswordValid){
-        return res.status(400).send('incorrect password');
-    } else {
-        const token = jwt.sign({_id: user._id, role: user.roles}, process.env.JWT_SECRET);   
-        res.status(201).json({message: `Welcome Back ${user.firstName}`, token: token});
+// console.log(user);
+// if(!user){
+//     return res.status(400).send('Email is not found');
+// }else {
+//     const isPasswordValid = bcrypt.compare(req.body.password, user.confirmPassword);
+   
+//     console.log(isPasswordValid)
+//     if(!isPasswordValid){
+//         return res.status(400).send('incorrect password');
+//     } else {
+//         const token = jwt.sign({_id: user._id, role: user.roles}, process.env.JWT_SECRET);   
+//         res.status(201).json({message: `Welcome Back ${user.firstName}`, token: token});
 
 
-    }
+//     }
 
+// }
+console.log(req.body.password, user);
+try {
+    if (user) {
+        bcrypt.compare(req.body.password, user.confirmPassword, function (error, success) {
+          if (error) {
+            console.log(error);
+            res.status(500).json({
+              error: " Internal Server ",
+            });
+          }
+          else{
+
+          
+          if (success) {
+            const token = jwt.sign({_id: user._id, role: user.roles}, process.env.JWT_SECRET);
+            res.json({
+              message: `welcome ${user.firstName}`,
+              token,
+            });
+          } else {
+            res.status(401).json({
+              error: `Incorrect Password`,
+            });
+          }
+        } 
+        });
+    
+      } else {
+        res.status(403).json({
+          error: "User not Found",
+        });
+    
+    }      
+} catch (error) {
+    console.log(user);
 }
+
+
+  
+
+
+
+
+
+
 
 // user.find({email: req.body.email});
 
@@ -151,3 +197,5 @@ export const deleteUser = async(req,res)=>{
         })
     }
 }
+
+

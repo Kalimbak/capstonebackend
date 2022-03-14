@@ -12,11 +12,11 @@ import  {authMiddleware, isAdmin} from "../middlewares/usermiddle.js";
 
 const router = express.Router();
 
-router.get('/blog', getAllArticles);
+router.get('/blog', authMiddleware, isAdmin, getAllArticles);
 
 router.post('/blogs',  authMiddleware, isAdmin,   upload.single('image'), createArticle);
 
-router.get('/blogs/:id', authMiddleware, getOneArticle);
+router.get('/blogs/:id', authMiddleware, isAdmin, getOneArticle);
 
 router.patch('/blogs/:id',authMiddleware, getArticle, isAdmin, modifyArticle);
 

@@ -22,13 +22,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter a password'],
         minlength: [8, 'Minimum password length is 6 character'],
-        select:false
+        // select:false
     },
     confirmPassword: {
         type: String,
         required: [true, 'Please confirm The password'],
         minlength: [8, 'passwords do not match'],
-        select:false
+        // select:false
     },
     roles: {
         type: String,

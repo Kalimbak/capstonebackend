@@ -5,7 +5,7 @@ import  { authMiddleware,isAdmin} from "../middlewares/usermiddle.js";
 const router = express.Router();
 
 
-router.post('/messages', authMiddleware, isAdmin, createMessage)
+router.post('/messages', createMessage)
 router.get('/messages', authMiddleware, isAdmin, getMessages)
 router.get('/messages/:id', authMiddleware, isAdmin, getMessage)
 // router.patch('/messages/:id', updateMessage)
