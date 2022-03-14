@@ -1,16 +1,14 @@
-import messageSchema from "../models/commentsSchema.js";
+import commentSchema from "../models/commentsSchema.js";
 
 
 const createComment = async(req, res) => {
     try {
-      const messages =  await messageSchema.create({
+      const messages =  await commentSchema.create({
             names: req.body.names,
-            email: req.body.email,
-            project: req.body.project,
-            message: req.body.message
+            comment: req.body.comment
         })
         res.status(200).json({
-            message: 'message successfully sent',
+            message: 'comment successfully sent',
             result:messages
         });
     } catch (error) {
@@ -23,9 +21,9 @@ const createComment = async(req, res) => {
 
 const getComments = async(req, res) => {
     try {
-        const allMessages = await messageSchema.find({})
+        const allMessages = await commentSchema.find({})
         res.status(200).json({
-            message: "messages displayed",
+            message: "comment displayed",
             result:allMessages
         })
     } catch (error) {
@@ -37,9 +35,9 @@ const getComments = async(req, res) => {
 const getComment = async(req,res)=>{
     try {
        let id = req.params.id;
-       const message = await messageSchema.findById(id)
+       const message = await commentSchema.findById(id)
        res.status(200).json({
-           message:"the message is displayed",
+           message:"the comment is displayed",
            result:message
        }) 
     } catch (error) {
@@ -53,13 +51,13 @@ const getComment = async(req,res)=>{
 const deleteComment = async(req,res)=>{
     try {
         let id = req.params.id;
-        await messageSchema.findByIdAndRemove(id)
+        await commentSchema.findByIdAndRemove(id)
         res.status(200).json({
-            message:"message deleted."
+            message:"comment deleted."
         })
     } catch (error) {
         res.status(500).json({
-            message:"message not deleted."
+            message:"comment not deleted."
         })
     }
 }

@@ -24,12 +24,15 @@ export const createArticle = (req, res, next) => {
       title: req.body.title,
       content: req.body.content,
       imageUrl: req.body.imageUrl,
-      userId: req.body.userId
+      userId: req.body.userId,
+      role: req.body.role
     });
+   
     article.save().then(
       () => {
         res.status(201).json({
           article: 'Article saved successfully!'
+
         });
       }
     ).catch(

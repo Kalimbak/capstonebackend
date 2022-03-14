@@ -9,7 +9,12 @@ const articleSchema = new mongoose.Schema({
     imageUrl: { type: String },
     userId: { type: String},
     avatar: { type: String},
-   cloudinary_id: { type: String}
+   cloudinary_id: { type: String},
+//    comments: [{
+
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: "comment"
+// }]
 });
 
 const article = mongoose.model("article", articleSchema)

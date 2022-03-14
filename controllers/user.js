@@ -37,7 +37,7 @@ export const signup = async (req, res) => {
   // check if the email is already exists
   const emailExists = await User.findOne({email: req.body.email});
   if(emailExists){
-      return res.status(400).send('Email already exists');
+      return res.status(400).send(`Email already exists `);
   }
   if(req.body.password !== req.body.confirmPassword ){
       return res.status(400).send('passwords do not match')
@@ -56,7 +56,8 @@ export const signup = async (req, res) => {
        lastName: req.body.lastName,
        email: req.body.email,
        password: hashedPassword,
-       confirmPassword: hashedPassword
+       confirmPassword: hashedPassword,
+       roles: req.body.roles
        
    });
 
@@ -91,8 +92,8 @@ if(!user){
     if(!isPasswordValid){
         return res.status(400).send('incorrect password');
     } else {
-        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET);   
-        res.status(201).json({message: `Welcome Back`, token: token});
+        const token = jwt.sign({_id: user._id, role: user.roles}, process.env.JWT_SECRET);   
+        res.status(201).json({message: `Welcome Back ${user.firstName}`, token: token});
 
 
     }
