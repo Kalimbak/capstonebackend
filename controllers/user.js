@@ -88,7 +88,7 @@ if(!user){
     return res.status(400).send('Email is not found');
 }else {
     const isPasswordValid = await bcrypt.compare(req.body.password, user.confirmPassword);
-    console.log(isPasswordValid)
+    // console.log(isPasswordValid)
     if(!isPasswordValid){
         return res.status(400).send('incorrect password');
     } else {
@@ -118,6 +118,9 @@ export const getUsers = async(req, res) => {
         })
     }
 }
+
+
+
 
 export const updateUser = async(req, res) => {
     try {

@@ -10,6 +10,8 @@ const router = express.Router()
 
  router.get('/users', getUsers);
 
+//  router.get('/users/:id', getUser);
+
  router.delete('/user/:id', deleteUser);
 
  router.patch('/user/:id', updateUser);
