@@ -1,14 +1,14 @@
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   Install:
     name: install the packages
     runs-on: MacOs
 
-    
+
   steps:
      - uses: actions/checkout@v2
      - uses: actions/setup-node@v2
