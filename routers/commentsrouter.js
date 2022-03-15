@@ -5,9 +5,9 @@ import  {authMiddleware, isAdmin} from "../middlewares/usermiddle.js";
 const router = express.Router();
 
 
-router.post('/Comments', createComment)
-router.get('/Comments', authMiddleware, isAdmin, getComments)
-router.get('/Comments/:id', authMiddleware, isAdmin, getComment)
-router.delete('/Comments/:id', authMiddleware, isAdmin, deleteComment)
+router.post('/blogs/:id/Comments', createComment)
+router.get('/blogs/:id/Comments', authMiddleware, isAdmin, getComments)
+router.get('/blogs/:id/Comments/:id', authMiddleware, isAdmin, getComment)
+router.delete('/blogs/:id/Comments/:id', authMiddleware, isAdmin, deleteComment)
 
 export default router;

@@ -2,15 +2,12 @@ import {login, signup, getUsers, updateUser, deleteUser} from '../controllers/us
 import express from 'express';
 
 const router = express.Router()
-// /**
+
  router.post('/user/signup', signup);
 
- // login Route
  router.post('/user/login', login);
 
  router.get('/users', getUsers);
-
-//  router.get('/users/:id', getUser);
 
  router.delete('/user/:id', deleteUser);
 
