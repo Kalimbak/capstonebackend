@@ -67,8 +67,9 @@ export const modifyArticle = async (req, res, next) => {
     if(!req.body.content) res.article.content = req.body.content
     if(!req.body.imageUrl) res.article.imageUrl = req.body.imageUrl
     try {
-        const updatedArticle = await res.article.save()
-        res.status(201).json(updatedArticle)
+        let id= req.params.id
+        const updatedArticle = await  Article.findByIdAndUpdate(id, req.body, {new:true})
+        res.status(201).json({message: 'succesfully updated', updatedArticle})
     } catch (error) {
         res.status(400).json({message: error.message})
     }

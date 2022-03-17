@@ -11,6 +11,14 @@ dotenv.config()
 
 const port = process.env.PORT
 
+let DB;
+
+
+ if (process.env.NODE_ENV === 'test') {
+  DB = process.env.DB_TEST;
+
+} else DB = process.env.PORT;
+
 mongoose.connect('mongodb+srv://Kalimba:kales12002.@cluster0.gc9iw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 console.log('your DB has been connected');
 
@@ -27,3 +35,6 @@ app.use(msgRouter);
 app.use(comRouter);
 
 app.listen(port, () =>console.log(`server running at ${port}`));
+
+
+export default app;

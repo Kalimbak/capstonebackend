@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/messages', createMessage)
 router.get('/messages', authMiddleware, isAdmin, getMessages)
 router.get('/messages/:id', authMiddleware, isAdmin, getMessage)
-// router.patch('/messages/:id', updateMessage)
+router.patch('/messages/:id', updateMessage)
 router.delete('/messages/:id', authMiddleware, isAdmin, deleteMessage)
 
 export default router;
