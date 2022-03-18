@@ -18,7 +18,10 @@ describe('Testing blog', () => {
         });
       done();
     });
-  
+  it('it should delete a blog', () => {
+
+  })
+
     it('test get one article', (done) => {
       chai
         .request(app)

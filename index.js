@@ -6,6 +6,7 @@ import blogRouter from "./routers/blogsrouter.js";
 import homeRouter from "./routers/homepage.js";
 import msgRouter from "./routers/messagerouter.js";
 import comRouter from "./routers/commentsrouter.js";
+import cors from "cors";
 
 dotenv.config()
 
@@ -26,7 +27,7 @@ console.log('your DB has been connected');
 
 const app = express()
 
-
+app.use(cors);
 app.use(express.json());
 app.use(router);
 app.use(blogRouter);

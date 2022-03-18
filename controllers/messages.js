@@ -4,7 +4,7 @@ import messageSchema from "../models/messagesSchema.js";
 const createMessage = async(req, res) => {
     try {
       const messages =  await messageSchema.create({
-            names: req.body.names,
+            fullNames: req.body.names,
             email: req.body.email,
             project: req.body.project,
             message: req.body.message
