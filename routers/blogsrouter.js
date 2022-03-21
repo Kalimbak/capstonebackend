@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.get('/blog', getAllArticles);
 
-router.post('/blogs',  authMiddleware, isAdmin,   upload.single('image'), createArticle);
+router.post('/blogs',    upload.single('image'), createArticle);
 
 router.get('/blogs/:id',  getOneArticle);
 

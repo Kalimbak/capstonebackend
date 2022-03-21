@@ -122,7 +122,7 @@ describe('Testing Message', () => {
   
       chai
         .request(app)
-        .post('/messages')
+        .post('/message')
         .send(message)
         .end((err, res) => {
           chai.expect(res.statusCode).to.equal(500);
