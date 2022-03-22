@@ -117,7 +117,8 @@ try {
             const token = jwt.sign({_id: user._id, role: user.roles}, process.env.JWT_SECRET);
             res.json({
               message: `welcome ${user.firstName}`,
-              token,
+              token, 
+              user,
             });
           } else {
             res.status(401).json({
