@@ -5,6 +5,7 @@ const createComment = async(req, res) => {
     try {
       const messages =  await commentSchema.create({
             names: req.body.names,
+            email: req.body.email,
             comment: req.body.comment
         })
         res.status(200).json({

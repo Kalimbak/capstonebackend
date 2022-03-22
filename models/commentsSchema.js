@@ -5,7 +5,13 @@ const commentSchema = new mongoose.Schema({
         type:'String',
         required:true
     },
-    
+    email: {
+        type: String,
+        required: [true, 'Please enter an email'],
+        unique: true,
+        lowercase: true,
+       
+    },
    comment:{
         type:'String',
         required:true
