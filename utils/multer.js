@@ -1,16 +1,20 @@
-import multer from 'multer';
+import cloudinary from "../utils/cloudinary.js";
 
-import path from 'path';
-
-export default multer ({
-    storage: multer.diskStorage({}),
-    fileFilter: (req, file, cb) => {
-        let ext = path.extname(file.originalname);
-        if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png" && ext !== ".pg") {
-            cb(new Error("File type is not supported"), false);
-            return;
-
-        }
-        cb(null, true);
+export const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb("Invalid Image File!", false);
+  }
+};
+export const fileUpload = async (req) => {
+  let imageUrl = "";
+  await cloudinary.v2.uploader.upload(
+    req.file.path,
+    async function (err, image) {
+      if (err) console.log(err);
+      imageUrl = image.url;
     }
-})
+  );
+  return imageUrl;
+};
