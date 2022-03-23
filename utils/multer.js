@@ -1,3 +1,4 @@
+import multer from "multer";
 import cloudinary from "../utils/cloudinary.js";
 
 export const fileFilter = (req, file, cb) => {
@@ -18,3 +19,5 @@ export const fileUpload = async (req) => {
   );
   return imageUrl;
 };
+
+export default multer;

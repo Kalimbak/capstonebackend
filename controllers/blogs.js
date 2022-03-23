@@ -1,7 +1,7 @@
 
 import  Article  from "../models/blogsSchema.js"
 import dotenv from "dotenv"
-import { fileUpload } from "../utils/multer";
+
 
 
 dotenv.config();
@@ -21,7 +21,7 @@ export const createArticle = (req, res, next) => {
 
     // const result = cloudinary.uploader.upload(req.file.path)
     // res.json(result)
-    req.body.imageUrl = await fileUpload(req);
+
     const article =  Article({
       title: req.body.title,
       content: req.body.content,
