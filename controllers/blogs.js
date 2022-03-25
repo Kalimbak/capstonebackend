@@ -19,13 +19,22 @@ export async function getArticle (req, res, next) {
 
 export const createArticle = (req, res, next) => {
 
-    // const result = cloudinary.uploader.upload(req.file.path)
-    // res.json(result)
-
+    const result = cloudinary.uploader.upload(req.file.path)
+    res.json(result)
+    // const storage = multer.diskStorage({
+    //     destination: function (req, file, cb) {
+    //         cb(null, path.join(__dirname, '../uploads/blog'));
+    //       },
+    //     filename: function (req, file, cb) {
+    //         cb(null, file.originalname);
+    //     }
+    // });
+    
+    // const uploadImg = multer({storage: storage}).single('image');
     const article =  Article({
       title: req.body.title,
       content: req.body.content,
-      imageUrl: req.body.imageUrl,
+      imageUrl: req.file.path,
       userId: req.body.userId,
       role: req.body.role
     });

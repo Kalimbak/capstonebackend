@@ -20,4 +20,3 @@ export const fileUpload = async (req) => {
   return imageUrl;
 };
 
-export default multer;

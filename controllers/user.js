@@ -37,10 +37,10 @@ export const signup = async (req, res) => {
   // check if the email is already exists
   const emailExists = await User.findOne({email: req.body.email});
   if(emailExists){
-      return res.status(400).send(`Email already exists `);
+      return res.status(400).json(`Email already exists `);
   }
   if(req.body.password !== req.body.confirmPassword ){
-      return res.status(400).send('passwords do not match')
+      return res.status(400).json('passwords do not match')
   }
 
    // HASH THE PASSWORD
@@ -70,7 +70,7 @@ export const signup = async (req, res) => {
         };
        res.status(201).json(data);
    } catch (error) {
-       res.status(400).send(error);
+       res.status(400).json(error);
    }
 
 }
