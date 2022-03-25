@@ -26,7 +26,7 @@ const upload = multer({ storage, fileFilter });
 
 router.get('/blog', getAllArticles);
 
-router.post('/blogs', upload.single("photo"),  createArticle);
+router.post('/blogs', upload.single("imageUrl"),  createArticle);
 
 router.get('/blogs/:id',  getOneArticle);
 
