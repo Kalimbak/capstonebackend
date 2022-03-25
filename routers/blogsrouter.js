@@ -13,20 +13,20 @@ import  {authMiddleware, isAdmin} from "../middlewares/usermiddle.js";
 
 
 const router = express.Router();
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../uploads/blog'));
-      },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
-    }
-});
 
-const uploadImg = multer({storage: storage}).single('image');
+const storage = multer.diskStorage({});
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith("image")) {
+        cb(null, true);
+    } else {
+        cb("invalid image file!", false);
+    }
+};
+const upload = multer({ storage, fileFilter });
 
 router.get('/blog', getAllArticles);
 
-router.post('/blogs', uploadImg,  createArticle);
+router.post('/blogs', upload.single("photo"),  createArticle);
 
 router.get('/blogs/:id',  getOneArticle);
 

@@ -1,5 +1,9 @@
 import cloudinary from 'cloudinary';
+import dotenv from "dotenv"
 
+dotenv.config({
+    path:"../env"
+})
 cloudinary.config({
     cloudinary_url: process.env.CLOUDINARY_URL,
     cloud_name: process.env.CLOUD,
