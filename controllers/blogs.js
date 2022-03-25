@@ -25,6 +25,7 @@ export const createArticle = (req, res, next) => {
     const article =  Article({
       title: req.body.title,
       content: req.body.content,
+      body: req.body.body,
       imageUrl: req.body.imageUrl,
       userId: req.body.userId,
       role: req.body.role
@@ -67,6 +68,7 @@ export const getOneArticle =(req, res, next) => {
 export const modifyArticle = async (req, res, next) => {
     if(!req.body.title) res.article.title = req.body.title
     if(!req.body.content) res.article.content = req.body.content
+    if(!req.body.body) res.article.body = req.body.body
     if(!req.body.imageUrl) res.article.imageUrl = req.body.imageUrl
     try {
         let id= req.params.id

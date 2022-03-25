@@ -4,8 +4,9 @@ import mongoose from 'mongoose';
 
 
 const articleSchema = new mongoose.Schema({
-    title: { type: String},
-    content: { type: String},
+    title: { type: String, required},
+    content: { type: String, required},
+    body: { type: String, required},
     imageUrl: { type: String },
     userId: { type: String},
     avatar: { type: String},
