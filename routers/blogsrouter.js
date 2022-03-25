@@ -30,7 +30,7 @@ router.post('/blogs', upload.single("imageUrl"),  createArticle);
 
 router.get('/blogs/:id',  getOneArticle);
 
-router.patch('/blogs/:id',authMiddleware, getArticle, isAdmin, modifyArticle);
+router.patch('/blogs/:id', getArticle,  modifyArticle);
 
 router.delete('/blogs/:id',authMiddleware, isAdmin, deleteArticle);
 
