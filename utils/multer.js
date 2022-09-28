@@ -1,22 +1,15 @@
+import cloudinary from './cloudinary.js';
 
-import cloudinary from "../utils/cloudinary.js";
-
-export const fileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image")) {
-    cb(null, true);
-  } else {
-    cb("Invalid Image File!", false);
-  }
-};
 export const fileUpload = async (req) => {
-  let imageUrl = "";
+  let profilePic = '';
+
   await cloudinary.v2.uploader.upload(
     req.file.path,
     async function (err, image) {
       if (err) console.log(err);
-      imageUrl = image.url;
+      if (image) profilePic = image.url;
     }
   );
-  return imageUrl;
-};
 
+  return profilePic;
+};

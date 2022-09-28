@@ -3,7 +3,8 @@ import  Article  from "../models/blogsSchema.js"
 import dotenv from "dotenv"
 import {fileUpload} from "../utils/multer.js"
 
-
+// import {fileUpload} from '../utils/multer';
+import path from "path"
 
 
 
@@ -25,20 +26,22 @@ export const createArticle = async (req, res ) => {
     // const result = cloudinary.uploader.upload(req.file.path)
     // res.json(result)
 req.body.imageUrl = await fileUpload(req)
+req.body.imageUrl = await fileUpload(req)
+const image = req.body.profilePic;
 
     const article =  Article({
       title: req.body.title,
       content: req.body.content,
-      body: req.body.body,
+    //   body: req.body.body,
       imageUrl: req.body.imageUrl,
       userId: req.body.userId,
-      role: req.body.role
+    //   role: req.body.role
     });
    
     article.save().then(
       () => { 
         res.status(201).json({
-          article: 'Article saved successfully!',
+          article: 'Article saved successfully!', article
         
 
         });

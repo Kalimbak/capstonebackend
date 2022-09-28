@@ -11,7 +11,7 @@ const signToken = (id) => {
 //handle errors
 const handleErrors = (err) => {
     console.log(err.message, err.code);
-    let errors = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+    let errors = { name: '', email: '', password: '' };
 
     // duplicate error code
     if (err.code === 11000) {
@@ -39,9 +39,9 @@ export const signup = async (req, res) => {
   if(emailExists){
       return res.status(400).json(`Email already exists `);
   }
-  if(req.body.password !== req.body.confirmPassword ){
-      return res.status(400).json('passwords do not match')
-  }
+//   if(req.body.password !== req.body.confirmPassword ){
+//       return res.status(400).json('passwords do not match')
+//   }
 
    // HASH THE PASSWORD
 
@@ -52,12 +52,13 @@ export const signup = async (req, res) => {
 
    // create a user
    const user =  User({
-       firstName: req.body.firstName,
-       lastName: req.body.lastName,
+    //    firstName: req.body.firstName,
+    //    lastName: req.body.lastName,
+    name: req.body.name,
        email: req.body.email,
        password: hashedPassword,
-       confirmPassword: hashedPassword,
-       roles: req.body.roles
+    //    confirmPassword: hashedPassword,
+    //    roles: req.body.roles
        
    });
 
@@ -68,12 +69,13 @@ export const signup = async (req, res) => {
             token,
             savedUser,
         };
-       res.status(201).json(data);
+       res.status(200).json(data);
    } catch (error) {
        res.status(400).json(error);
    }
 
 }
+
 
 
 
@@ -103,7 +105,9 @@ const user = await User.findOne({email: req.body.email});
 console.log(req.body.password, user);
 try {
     if (user) {
-        bcrypt.compare(req.body.password, user.confirmPassword, function (error, success) {
+        bcrypt.compare(req.body.password,
+            //  user.confirmPassword, 
+             function (error, success) {
           if (error) {
             console.log(error);
             res.status(500).json({
@@ -114,9 +118,12 @@ try {
 
           
           if (success) {
-            const token = jwt.sign({_id: user._id, role: user.roles}, process.env.JWT_SECRET);
+            const token = jwt.sign({_id: user._id,
+                //  role: user.roles
+                }, 
+                 process.env.JWT_SECRET);
             res.json({
-              message: `welcome ${user.firstName}`,
+              message: `welcome ${user.name}`,
               token, 
               user,
             });

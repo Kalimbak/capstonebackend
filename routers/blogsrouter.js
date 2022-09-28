@@ -14,19 +14,42 @@ import  {authMiddleware, isAdmin} from "../middlewares/usermiddle.js";
 
 const router = express.Router();
 
-const storage = multer.diskStorage({});
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype.startsWith("image")) {
-        cb(null, true);
-    } else {
-        cb("invalid image file!", false);
-    }
-};
-const upload = multer({ storage, fileFilter });
+// const storage = multer.diskStorage({});
+// const fileFilter = (req, file, cb) => {
+//     if (file.mimetype.startsWith("image")) {
+//         cb(null, true);
+//     } else {
+//         cb("invalid image file!", false);
+//     }
+// };
+// const upload = multer({ storage, fileFilter });
 
+
+
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().getTime() + path.extname(file.originalname))
+  }
+})
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true)
+  } else {
+    cb(new Error('Unsupported files'), false)
+  }
+}
+
+  
+const uploadImg = multer({storage: storage}).single('profilePic', fileFilter);
 router.get('/blog', getAllArticles);
 
-router.post('/blogs', upload.single("imageUrl"),  createArticle);
+router.post('/blogs', uploadImg,  createArticle);
 
 router.get('/blogs/:id',  getOneArticle);
 

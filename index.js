@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import express from "express";
 import dotenv from "dotenv";
+import jobRouter from "./routers/jobrouter.js"
 import router from "./routers/userrouter.js";
 import blogRouter from "./routers/blogsrouter.js";
 import homeRouter from "./routers/homepage.js";
@@ -20,7 +21,7 @@ let DB;
 
 } else DB = process.env.PORT;
 
-mongoose.connect('mongodb+srv://Kalimba:kales12002.@cluster0.gc9iw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://eazy:987654321k@cluster0.88vdgop.mongodb.net/kevin?retryWrites=true&w=majority')
 console.log('your DB has been connected');
 
 
@@ -31,6 +32,7 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
 app.use(blogRouter);
+app.use(jobRouter);
 app.use(homeRouter);
 app.use(msgRouter);
 app.use(comRouter);

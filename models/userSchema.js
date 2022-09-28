@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
-    firstName: {
-        type: String,
-        required: [true, 'Please enter your first name'],
+    // firstName: {
+    //     type: String,
+    //     required: [true, 'Please enter your first name'],
         
-    },
-    lastName: {
+    // },
+    name: {
         type: String,
         required: [true, 'Please enter your second name'],
     },
@@ -24,17 +24,17 @@ const userSchema = new mongoose.Schema({
         minlength: [8, 'Minimum password length is 6 character'],
         // select:false
     },
-    confirmPassword: {
-        type: String,
-        required: [true, 'Please confirm The password'],
-        minlength: [8, 'passwords do not match'],
-        // select:false
-    },
-    roles: {
-        type: String,
-        default: "user",
-        enum: ["user", "admin"],
-    }
+    // confirmPassword: {
+    //     type: String,
+    //     required: [true, 'Please confirm The password'],
+    //     minlength: [8, 'passwords do not match'],
+    //     // select:false
+    // },
+    // roles: {
+    //     type: String,
+    //     default: "user",
+    //     enum: ["user", "admin"],
+    // }
 
 });
 
