@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import jobRouter from "./routers/jobrouter.js"
 import router from "./routers/userrouter.js";
+import articleRouter from "./routers/blogRouter.js";
 import blogRouter from "./routers/blogsrouter.js";
 import homeRouter from "./routers/homepage.js";
 import msgRouter from "./routers/messagerouter.js";
@@ -31,6 +32,7 @@ const app = express()
 app.use(cors());
 app.use(express.json());
 app.use(router);
+app.use(articleRouter);
 app.use(blogRouter);
 app.use(jobRouter);
 app.use(homeRouter);

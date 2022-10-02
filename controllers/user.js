@@ -85,23 +85,7 @@ export const login = async (req, res) => {
 // check if the email exists
 
 const user = await User.findOne({email: req.body.email});
-// console.log(user);
-// if(!user){
-//     return res.status(400).send('Email is not found');
-// }else {
-//     const isPasswordValid = bcrypt.compare(req.body.password, user.confirmPassword);
-   
-//     console.log(isPasswordValid)
-//     if(!isPasswordValid){
-//         return res.status(400).send('incorrect password');
-//     } else {
-//         const token = jwt.sign({_id: user._id, role: user.roles}, process.env.JWT_SECRET);   
-//         res.status(201).json({message: `Welcome Back ${user.firstName}`, token: token});
 
-
-//     }
-
-// }
 console.log(req.body.password, user);
 try {
     if (user) {
